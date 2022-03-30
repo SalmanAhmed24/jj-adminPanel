@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AddForm from '../components/addForm/addForm';
 import EventTable from '../components/eventTable/eventTable';
 import axios from 'axios';
+import apiRoute from '../utils/config';
 
 function Events() {
 	const [ eventData, setEventData ] = useState('');
@@ -10,7 +11,7 @@ function Events() {
 	useEffect(() => {
 		setLoaderFlag(true);
 		axios
-			.get('http://localhost:3002/api/allEvents')
+			.get(`${apiRoute.url}/api/allEvents`)
 			.then((res) => {
 				setEventData(res.data);
 				setLoaderFlag(false);
@@ -23,7 +24,7 @@ function Events() {
 	const getData = () => {
 		setLoaderFlag(true);
 		axios
-			.get('http://localhost:3002/api/allEvents')
+			.get(`${apiRoute.url}/api/allEvents`)
 			.then((res) => {
 				setEventData(res.data);
 				setLoaderFlag(false);

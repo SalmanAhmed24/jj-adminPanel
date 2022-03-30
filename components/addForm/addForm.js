@@ -2,6 +2,7 @@ import moment from 'moment';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import apiRoute from '../../utils/config';
 
 function AddForm({ getData }) {
 	const d = new Date();
@@ -10,7 +11,8 @@ function AddForm({ getData }) {
 	const [ title, setTitle ] = useState('');
 	const [ speaker, setSpeaker ] = useState('');
 	const [ date, setDate ] = useState(currentDate);
-	const [ time, setTime ] = useState(`${currentTime}`);
+	const [ startTime, setStartTime ] = useState(`${currentTime}`);
+	const [ endTime, setEndTime ] = useState(`${currentTime}`);
 	const [ phone, setPhone ] = useState();
 	const [ address, setAddress ] = useState('');
 	const [ file, setFile ] = useState();
@@ -18,7 +20,8 @@ function AddForm({ getData }) {
 	const titleHandler = (e) => setTitle(e.target.value);
 	const speakerHandler = (e) => setSpeaker(e.target.value);
 	const dateHandler = (e) => setDate(e.target.value);
-	const timeHandler = (e) => setTime(e.target.value);
+	const startTimeHandler = (e) => setStartTime(e.target.value);
+	const endTimeHandler = (e) => setEndTime(e.target.value);
 	const phoneHandler = (e) => setPhone(e.target.value);
 	const addressHandler = (e) => setAddress(e.target.value);
 	const fileHandler = (e) => {
@@ -33,7 +36,8 @@ function AddForm({ getData }) {
 		setFile();
 		setPhone('');
 		setDate(currentDate);
-		setTime(`${currentTime}`);
+		setStartTime(`${currentTime}`);
+		setEndTime(`${currentTime}`);
 	};
 	const submitHandler = () => {
 		const formData = new FormData();
@@ -45,7 +49,7 @@ function AddForm({ getData }) {
 		formData.append('address', address);
 		formData.append('file', file);
 		axios
-			.post('http://localhost:3002/api/addEvents', formData)
+			.post(`${apiRoute.url}/api/addEvents`, formData)
 			.then((res) => {
 				Swal.fire({
 					title: 'Success',
@@ -78,13 +82,12 @@ function AddForm({ getData }) {
 				/>
 			</div>
 			<div className="inputWrap">
-				<input
-					type={'time'}
-					value={time}
-					className="singleInp"
-					placeholder="Enter Time"
-					onChange={timeHandler}
-				/>
+				<input type={'time'} value={startTime} className="singleInp" onChange={startTimeHandler} />
+				<span>( Start Time )</span>
+			</div>
+			<div className="inputWrap">
+				<input type={'time'} value={endTime} className="singleInp" onChange={endTimeHandler} />
+				<span>( End Time )</span>
 			</div>
 			<div className="inputWrap">
 				<input type={'number'} className="singleInp" placeholder="Enter Phone" onChange={phoneHandler} />
