@@ -44,7 +44,8 @@ function AddForm({ getData }) {
 		formData.append('title', title);
 		formData.append('speaker', speaker);
 		formData.append('date', date);
-		formData.append('time', time);
+		formData.append('startTime', startTime);
+		formData.append('endTime', endTime);
 		formData.append('phone', phone);
 		formData.append('address', address);
 		formData.append('file', file);

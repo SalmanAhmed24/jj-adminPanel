@@ -6,7 +6,29 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-function EventTable({ events }) {
+import axios from 'axios';
+import apiRoute from '../../utils/config';
+import Swal from 'sweetalert2';
+function EventTable({ events, getData }) {
+	const deleteEvent = (id) => {
+		Swal.fire({
+			title: 'Delete Event',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Delete'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				axios
+					.delete(`${apiRoute.url}/api/deleteEvents?id=${id}`)
+					.then((res) => {
+						getData();
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			}
+		});
+	};
 	return (
 		<div className="tableWrap">
 			<TableContainer component={Paper}>
@@ -20,6 +42,7 @@ function EventTable({ events }) {
 							<TableCell>Address</TableCell>
 							<TableCell>Phone</TableCell>
 							<TableCell>Image</TableCell>
+							<TableCell>Actions</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -36,6 +59,11 @@ function EventTable({ events }) {
 									<TableCell>{row.phone}</TableCell>
 									<TableCell>
 										<img className="bannerImage" src={`data:image/png;base64,${row.file.data}`} />
+									</TableCell>
+									<TableCell>
+										<p className="delete" onClick={() => deleteEvent(row._id)}>
+											Delete
+										</p>
 									</TableCell>
 								</TableRow>
 							))}

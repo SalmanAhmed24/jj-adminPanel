@@ -66,3 +66,11 @@
 .tableWrap {
 	padding: 10px 50px;
 }
+.delete {
+	text-transform: uppercase;
+	transition: 0.3s ease-in-out;
+	&:hover {
+		cursor: pointer;
+		transform: scale(1.05);
+	}
+}

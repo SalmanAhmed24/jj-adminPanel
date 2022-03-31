@@ -41,7 +41,7 @@ function Events() {
 				<button onClick={() => setShowAddForm(!showAddForm)}>Add Event</button>
 			</div>
 			{showAddForm ? <AddForm getData={() => getData()} /> : null}
-			{loaderFlag ? <p>Loading...</p> : <EventTable events={eventData} />}
+			{loaderFlag ? <p>Loading...</p> : <EventTable getData={() => getData()} events={eventData} />}
 		</div>
 	);
 }
