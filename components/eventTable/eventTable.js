@@ -38,7 +38,8 @@ function EventTable({ events, getData }) {
 							<TableCell>Title</TableCell>
 							<TableCell>Speaker</TableCell>
 							<TableCell>Date</TableCell>
-							<TableCell>Time</TableCell>
+							<TableCell>Start Time</TableCell>
+							<TableCell>End Time</TableCell>
 							<TableCell>Address</TableCell>
 							<TableCell>Phone</TableCell>
 							<TableCell>Image</TableCell>
@@ -54,7 +55,8 @@ function EventTable({ events, getData }) {
 									</TableCell>
 									<TableCell>{row.speaker}</TableCell>
 									<TableCell>{row.date}</TableCell>
-									<TableCell>{row.time}</TableCell>
+									<TableCell>{row.startTime}</TableCell>
+									<TableCell>{row.endTime}</TableCell>
 									<TableCell>{row.address}</TableCell>
 									<TableCell>{row.phone}</TableCell>
 									<TableCell>
