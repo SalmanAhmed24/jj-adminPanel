@@ -16,6 +16,7 @@ function AddForm({ getData }) {
 	const [ phone, setPhone ] = useState();
 	const [ address, setAddress ] = useState('');
 	const [ file, setFile ] = useState();
+	const [ mobileFile, setMobileFile ] = useState();
 
 	const titleHandler = (e) => setTitle(e.target.value);
 	const speakerHandler = (e) => setSpeaker(e.target.value);
@@ -29,11 +30,16 @@ function AddForm({ getData }) {
 		const file = e.target.files[0];
 		setFile(file);
 	};
+	const fileMobileHandler = (e) => {
+		const file = e.target.files[0];
+		setMobileFile(file);
+	};
 	const resetData = () => {
 		setTitle('');
 		setSpeaker('');
 		setAddress('');
 		setFile();
+		setMobileFile();
 		setPhone('');
 		setDate(currentDate);
 		setStartTime(`${currentTime}`);
@@ -49,6 +55,7 @@ function AddForm({ getData }) {
 		formData.append('phone', phone);
 		formData.append('address', address);
 		formData.append('file', file);
+		formData.append('mobileImg', mobileFile);
 		axios
 			.post(`${apiRoute.url}/api/addEvents`, formData)
 			.then((res) => {
@@ -96,8 +103,25 @@ function AddForm({ getData }) {
 			<div className="inputWrap">
 				<input type={'text'} className="singleInp" placeholder="Enter Address" onChange={addressHandler} />
 			</div>
-			<div className="inputWrap">
-				<input type={'file'} className="singleInp" placeholder="Upload File" onChange={fileHandler} />
+			<div className="inputWrap" style={{ width: '100%', marginTop: '20px' }}>
+				<label style={{ display: 'inline-block', width: '150px' }}>Desktop Image</label>
+				<input
+					style={{ width: '300px' }}
+					type={'file'}
+					className="singleInp"
+					placeholder="Upload File"
+					onChange={fileHandler}
+				/>
+			</div>
+			<div className="inputWrap" style={{ width: '100%', marginTop: '20px' }}>
+				<label style={{ display: 'inline-block', width: '150px' }}>Mobile Image</label>
+				<input
+					style={{ width: '300px' }}
+					type={'file'}
+					className="singleInp"
+					placeholder="Upload Mobile Image"
+					onChange={fileMobileHandler}
+				/>
 			</div>
 			<div className="inputWrap btnwrap">
 				<button onClick={submitHandler}>Add</button>

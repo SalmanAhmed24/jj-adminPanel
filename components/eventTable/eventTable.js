@@ -42,7 +42,8 @@ function EventTable({ events, getData }) {
 							<TableCell>End Time</TableCell>
 							<TableCell>Address</TableCell>
 							<TableCell>Phone</TableCell>
-							<TableCell>Image</TableCell>
+							<TableCell>Desktop Image</TableCell>
+							<TableCell>Mobile Image</TableCell>
 							<TableCell>Actions</TableCell>
 						</TableRow>
 					</TableHead>
@@ -61,6 +62,16 @@ function EventTable({ events, getData }) {
 									<TableCell>{row.phone}</TableCell>
 									<TableCell>
 										<img className="bannerImage" src={`data:image/png;base64,${row.file.data}`} />
+									</TableCell>
+									<TableCell>
+										{row.mobileImg ? (
+											<img
+												className="bannerImage"
+												src={`data:image/png;base64,${row.mobileImg.data}`}
+											/>
+										) : (
+											'--'
+										)}
 									</TableCell>
 									<TableCell>
 										<p className="delete" onClick={() => deleteEvent(row._id)}>
